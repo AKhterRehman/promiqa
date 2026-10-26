@@ -1,0 +1,598 @@
+/* ---------- layout ---------- */
+.collage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Same lean as the reference video: columns rotate clockwise (top-left → bottom-right)
+   and the collage runs under the headline too; the overlay keeps the text readable. */
+.collage__tilt {
+  position: absolute;
+  left: 8%;
+  right: -18%;
+  top: -26%;
+  bottom: -26%;
+  display: flex;
+  gap: 26px;
+  transform: perspective(1400px) rotateX(8deg) rotateZ(11deg) scale(1.1);
+  transform-origin: 55% 50%;
+}
+
+.collage__col {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.collage__track {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  will-change: transform;
+  transform: translate3d(0, var(--offset, 0%), 0);
+  animation: collageScroll var(--dur, 50s) linear infinite;
+}
+
+.collage__col--reverse .collage__track {
+  animation-direction: reverse;
+}
+
+/* the track holds two identical copies, so -50% loops seamlessly */
+@keyframes collageScroll {
+  from {
+    transform: translate3d(0, var(--offset, 0%), 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--offset, 0%) - 50%), 0);
+  }
+}
+
+/* ---------- mock cards ---------- */
+.mock {
+  position: relative;
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--m-paper);
+  color: var(--m-ink);
+  box-shadow:
+    0 30px 60px rgba(0, 15, 12, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  font-family: var(--font-body);
+}
+
+.mock__bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 10px;
+  background: #e9efec;
+}
+
+.mock__bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c3d1cb;
+}
+
+.mock__bar i:nth-child(1) {
+  background: #f0786f;
+}
+.mock__bar i:nth-child(2) {
+  background: #f3c252;
+}
+.mock__bar i:nth-child(3) {
+  background: #5fcf86;
+}
+
+.mock__url {
+  flex: 1;
+  height: 10px;
+  margin-left: 8px;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+.mock__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mock__line {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: currentColor;
+  opacity: 0.9;
+}
+
+.mock__lines--xl .mock__line {
+  height: 16px;
+  border-radius: 6px;
+}
+.mock__lines--lg .mock__line {
+  height: 12px;
+  border-radius: 5px;
+}
+.mock__lines--sm .mock__line {
+  height: 6px;
+  opacity: 0.55;
+}
+.mock__lines--xs .mock__line {
+  height: 5px;
+  opacity: 0.5;
+}
+
+.mock__lines + .mock__lines {
+  margin-top: 12px;
+}
+
+.mock__btn {
+  display: inline-block;
+  width: 92px;
+  height: 26px;
+  margin-top: 14px;
+  border-radius: 4px;
+  background: var(--m-accent);
+}
+
+.mock__pill {
+  width: 58px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--m-accent);
+}
+
+/* site */
+.mock__nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--m-bg);
+}
+
+.mock__logo {
+  width: 54px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--m-ink);
+}
+
+.mock__navlinks {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.mock__navlinks i {
+  width: 22px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--m-ink);
+  opacity: 0.7;
+}
+
+.mock__hero {
+  padding: 22px 18px 20px;
+  background: var(--m-bg);
+  color: var(--m-ink);
+}
+
+.mock__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px;
+}
+
+.mock__grid span {
+  height: 64px;
+  border-radius: 6px;
+  background: var(--m-soft);
+}
+
+.mock__grid span:nth-child(2) {
+  background: linear-gradient(135deg, var(--m-soft), var(--m-accent));
+}
+
+/* landing */
+.mock__split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+  padding: 20px 16px;
+  background: var(--m-bg);
+  color: var(--m-ink);
+}
+
+.mock__art {
+  border-radius: 8px;
+  min-height: 92px;
+  background:
+    radial-gradient(60% 60% at 70% 30%, var(--m-accent), transparent 70%),
+    linear-gradient(160deg, var(--m-soft), var(--m-bg));
+}
+
+.mock__logos {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 18px;
+}
+
+.mock__logos i {
+  width: 34px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--m-soft);
+}
+
+.mock__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 0 14px 14px;
+}
+
+.mock__cards span {
+  height: 56px;
+  border-radius: 6px;
+  background: var(--m-soft);
+  border-top: 3px solid var(--m-accent);
+}
+
+/* dashboard */
+.mock__dash {
+  padding: 14px;
+  background: var(--m-bg);
+  color: var(--m-ink);
+}
+
+.mock__kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mock__kpis div {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mock--dash[style*='--m-bg: #f1faf6'] .mock__kpis div {
+  background: rgba(6, 81, 62, 0.06);
+  border-color: rgba(6, 81, 62, 0.12);
+}
+
+.mock__kpis small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.mock__kpis b {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.mock__chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 78px;
+  padding: 8px 6px 0;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.mock__chart i {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, var(--m-accent), var(--m-soft));
+}
+
+/* chat */
+.mock__chat {
+  padding: 12px 12px 14px;
+  background: var(--m-bg);
+  color: var(--m-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mock__chathead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.mock__chathead .mock__lines {
+  flex: 1;
+}
+
+.mock__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--m-accent);
+}
+
+.mock__online {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4fd1ad;
+  box-shadow: 0 0 0 3px rgba(79, 209, 173, 0.25);
+}
+
+.mock__bubble {
+  max-width: 82%;
+  padding: 7px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.mock__bubble--in {
+  align-self: flex-start;
+  background: var(--m-soft);
+  color: var(--m-ink);
+  border-bottom-left-radius: 3px;
+}
+
+.mock__bubble--out {
+  align-self: flex-end;
+  background: var(--m-accent);
+  color: var(--m-paper);
+  border-bottom-right-radius: 3px;
+}
+
+.mock--chat[style*='--m-accent: #e8b848'] .mock__bubble--out,
+.mock--chat[style*='--m-accent: #f8e848'] .mock__bubble--out {
+  color: #012a22;
+}
+
+.mock__typing {
+  display: flex;
+  gap: 4px;
+  padding: 6px 10px;
+  align-self: flex-start;
+  border-radius: 12px;
+  background: var(--m-soft);
+}
+
+.mock__typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+.mock__typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.mock__typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-3px);
+  }
+}
+
+/* phone */
+.mock--phone {
+  width: 58%;
+  margin-inline: auto;
+  border-radius: 22px;
+  box-shadow:
+    0 30px 60px rgba(0, 15, 12, 0.55),
+    0 0 0 6px #0b1f1a,
+    0 0 0 7px rgba(255, 255, 255, 0.12);
+}
+
+.mock__phone {
+  position: relative;
+  background: var(--m-paper);
+}
+
+.mock__notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 44%;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  background: #0b1f1a;
+  z-index: 1;
+}
+
+.mock__phonehero {
+  padding: 34px 14px 18px;
+  background: var(--m-bg);
+  color: var(--m-ink);
+}
+
+.mock__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.mock__list span {
+  height: 30px;
+  border-radius: 6px;
+  background: var(--m-soft);
+  border-left: 3px solid var(--m-accent);
+}
+
+.mock__tabbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 10px 12px;
+  border-top: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.mock__tabbar i {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--m-soft);
+}
+
+.mock__tabbar i:first-child {
+  background: var(--m-accent);
+}
+
+/* calendar */
+.mock__cal {
+  padding: 12px;
+  background: var(--m-paper);
+  color: var(--m-accent);
+}
+
+.mock__calhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.mock__calhead .mock__lines {
+  flex: 1;
+}
+
+.mock__calgrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.mock__calgrid i {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--m-soft);
+}
+
+.mock__calgrid i.is-booked {
+  background: var(--m-accent);
+}
+
+.mock__slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--m-soft);
+}
+
+.mock__slot b {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--m-accent);
+}
+
+.mock__slot .mock__lines {
+  flex: 1;
+}
+
+/* brand board */
+.mock__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 18px;
+  background: linear-gradient(135deg, #012a22, #06513e 50%, #13a77f);
+  color: #ffffff;
+}
+
+.mock__brand img {
+  width: 70%;
+  height: auto;
+}
+
+.mock__swatches {
+  display: flex;
+  gap: 6px;
+}
+
+.mock__swatches i {
+  flex: 1;
+  height: 26px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+/* cover */
+.mock__cover {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .collage__tilt {
+    left: -6%;
+    right: -20%;
+    gap: 18px;
+    transform: perspective(1400px) rotateX(8deg) rotateZ(11deg) scale(1.15);
+  }
+
+  .collage__track {
+    gap: 18px;
+  }
+
+  .collage__col:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .collage__tilt {
+    left: -30%;
+    right: -10%;
+  }
+
+  .collage__col:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collage__track,
+  .mock__typing i {
+    animation: none;
+  }
+}

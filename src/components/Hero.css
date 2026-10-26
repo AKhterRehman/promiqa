@@ -1,0 +1,201 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 150px; /* bottom room for the logo marquee */
+  overflow: hidden;
+  color: var(--p-white);
+  background: var(--p-green-900);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 467px;
+  column-gap: 44px;
+  row-gap: 50px;
+  align-items: center;
+}
+
+.hero__content {
+  max-width: 560px;
+}
+
+/* ---------- heading ---------- */
+.c-heading__head {
+  font-size: clamp(42px, 5.1vw, 73.44px);
+  line-height: 1.1;
+}
+
+.c-heading__pre,
+.c-heading__title {
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+.c-heading__pre {
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin-right: 0.22em;
+}
+
+.c-heading__title strong {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.c-heading__title mark {
+  display: inline-block;
+  margin-top: 26px;
+  background: none;
+  color: var(--p-white);
+  font-size: clamp(20px, 2.04vw, 29.38px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.c-heading__sub {
+  margin: 30px 0 0;
+  max-width: 550px;
+  font-size: clamp(17px, 1.44vw, 20.74px);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero__divider {
+  width: 60%;
+  height: 1px;
+  margin: 26px 0 30px;
+  background: rgba(255, 255, 255, 0.23);
+}
+
+/* ---------- trust row ---------- */
+.trust {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.trust__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trust__icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 4px 12px rgba(248, 232, 72, 0.25));
+}
+
+.trust__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trust__label {
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.trust__stars {
+  display: inline-flex;
+  gap: 3px;
+  color: var(--p-gold-400);
+}
+
+.trust__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-brand);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.trust__sep {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(20deg);
+  margin: 0 6px;
+}
+
+/* ---------- right column ---------- */
+.hero__form {
+  position: relative;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr) 420px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 110px 0 130px;
+    align-items: flex-start;
+  }
+
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__content {
+    max-width: 640px;
+  }
+
+  .hero__form {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 96px 0 110px;
+  }
+
+  .c-heading__head {
+    font-size: clamp(36px, 10.5vw, 48px);
+  }
+
+  .c-heading__title mark {
+    margin-top: 18px;
+    font-size: 19px;
+  }
+
+  .c-heading__sub {
+    margin-top: 22px;
+    font-size: 16.5px;
+  }
+
+  .hero__divider {
+    width: 100%;
+  }
+
+  .trust {
+    gap: 16px;
+  }
+
+  .trust__sep {
+    display: none;
+  }
+}
